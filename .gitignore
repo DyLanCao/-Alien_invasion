@@ -1,0 +1,17 @@
+.pydevproject
+.project
+.settings/*
+db.sqlite3
+blog/migrations/*
+blog/static/blog/css/unused/*
+blog/static/blog/images_before_compression/*
+*.pyc
+*.swp
+*.swo
+.idea
+.DS_Store
+blog/.ropeproject/
+blog/*.sw*
+blogproject/*.sw*
+templates/blog/*.sw*
+.ropeproject

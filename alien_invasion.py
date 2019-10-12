@@ -2,6 +2,8 @@ import sys
 import pygame
 
 from settings import Settings
+from ship import Ship
+
 def run_game():
     #初始化游戏并创建一个对象
     pygame.init()
@@ -10,6 +12,7 @@ def run_game():
     pygame.display.set_caption("Alien Invasion")
 
     bg_color = (230,230,230)
+    ship = Ship(screen)
 
     while True:
         for event in pygame.event.get():
@@ -17,6 +20,7 @@ def run_game():
                 sys.exit()
         
         screen.fill(ai_settings.bg_color)
+        ship.blitme()
 
         pygame.display.flip()
 
