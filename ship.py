@@ -11,6 +11,14 @@ class Ship():
         #put the aliens on button
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom
+        
+        self.moving_right = False
+        self.moving_left = False
+    def update(self):
+        if self.moving_right:
+            self.rect.centerx += 8
+        if self.moving_left:
+            self.rect.centerx -= 8
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)
