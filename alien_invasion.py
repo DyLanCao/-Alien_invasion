@@ -29,7 +29,7 @@ def run_game():
         ship.update()
         bullets.update()
         gf.update_bullets(bullets)
-        print(len(bullets))
+        gf.update_aliens(aliens)
         gf.update_screen(ai_settings,screen,ship,aliens,bullets)
         #screen.fill(ai_settings.bg_color)
         #ship.blitme()
