@@ -124,13 +124,15 @@ def check_fleet_edges(ai_settings, aliens):
     
     for alien in aliens.sprites():
         if alien.check_edges():
+            print("alien is True")
             change_fleet_direction(ai_settings, aliens)
             break
 
 def change_fleet_direction(ai_settings, aliens):
     for alien in aliens.sprites():
         alien.rect.y += ai_settings.fleet_drop_speed
-    ai_settings.fleet_direction += -1
+    ai_settings.fleet_direction *= -1
+    print("fleet dir:",ai_settings.fleet_direction)
 
 def create_fleet(ai_settings, screen, ship, aliens):
     alien = Alien(ai_settings, screen)
