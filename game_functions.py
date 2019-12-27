@@ -4,6 +4,7 @@ import pygame
 from bullet import Bullet
 from alien import Alien
 from time import sleep
+from score import Score
 
 def check_keydown_events(event,ai_settings, screen, ship, bullets):
     if event.key == pygame.K_RIGHT:
@@ -69,14 +70,14 @@ def update_screen(ai_settings, screen,stats,sb, ship, aliens, bullets,play_butto
     aliens.draw(screen)
     pygame.display.flip()
 
-def update_bullets(ai_settings, screen,stats,sb, ship, aliens, bullets):
+def update_bullets(ai_settings, screen,stats,sb, ship, aliens, bullets,hscore):
     bullets.update()
 
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
-    check_bullets_alien_collisions(ai_settings, screen,stats, sb, ship,aliens, bullets)
-def check_bullets_alien_collisions(ai_settings, screen,stats,sb, ship, aliens, bullets):
+    check_bullets_alien_collisions(ai_settings, screen,stats, sb, ship,aliens, bullets,hscore)
+def check_bullets_alien_collisions(ai_settings, screen,stats,sb, ship, aliens, bullets,hscore):
     collisions = pygame.sprite.groupcollide(bullets,aliens,True,True)
     
     if len(aliens) == 0:
@@ -94,7 +95,7 @@ def check_bullets_alien_collisions(ai_settings, screen,stats,sb, ship, aliens, b
         for aliens in collisions.values():
             stats.score += ai_settings.alien_points * len(aliens)
             sb.prep_score()
-        check_high_score(stats,sb)
+        check_high_score(stats,sb,hscore)
 
 def fire_bullet(ai_settings, screen, ship, bullets):
     if len(bullets) < ai_settings.bullets_allowed:
@@ -187,8 +188,9 @@ def check_aliens_bottom(ai_settings, screen, stats,sb, ship,aliens,bullets):
             break
 
 
-def check_high_score(stats,sb):
+def check_high_score(stats,sb,hscore):
     if stats.score > stats.high_score:
         stats.high_score = stats.score
+        hscore.score_record(stats.high_score)
         sb.prep_high_score()
 

@@ -9,6 +9,7 @@ from alien import Alien
 from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
+from score import Score
 
 def run_game():
     #初始化游戏并创建一个对象
@@ -17,7 +18,8 @@ def run_game():
     screen = pygame.display.set_mode((ai_settings.screen_width,ai_settings.screen_height))
     pygame.display.set_caption("Alien Invasion")
     
-    stats = GameStats(ai_settings)
+    hscore = Score()
+    stats = GameStats(ai_settings,hscore.score_get())
     sb = Scoreboard(ai_settings,screen,stats)
 
     bg_color = (230,230,230)
@@ -36,7 +38,7 @@ def run_game():
         bullets.update()
         if stats.game_active:
             ship.update()
-            gf.update_bullets(ai_settings, screen,stats,sb, ship, aliens, bullets)
+            gf.update_bullets(ai_settings, screen,stats,sb, ship, aliens, bullets,hscore)
             gf.update_aliens(ai_settings,screen, stats,sb, ship, aliens,bullets)
         gf.update_screen(ai_settings,screen,stats,sb,ship,aliens,bullets,play_button)
         #screen.fill(ai_settings.bg_color)
